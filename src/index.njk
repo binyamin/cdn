@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Index | cdn.binyam.in</title>
+	{# <link rel="stylesheet" href="/style.css" /> #}
+</head>
+<body>
+	{# <header></header> #}
+	<main>
+		<h1>Binyamin's CDN</h1>
+		<section>
+			<h2>Usage</h2>
+			<p>The packages are meant to be imported from an ES module. They include the <var>x-typescript-types</var> HTTP header, for Deno usage.</p>
+			{%- capture usage | trim %}
+import { html } from 'https://cdn.binyam.in/pkg/tiny-html-tags@0.1.0';
+
+document.append(html.p('Hello'));
+			{% endcapture %}
+			<pre class="language-js"><code>{{usage}}</code></pre>
+		</section>
+		<section>
+			<h2>Packages</h2>
+			<p>The following packages are available:</p>
+			<ul role="list">
+				{% for pkg in packages %}
+				<li>
+					<div aria-labelledby="#name-{{pkg.name}}">
+						<p id="name-{{pkg.name}}">{{pkg.name}}</p>
+						<p>{{pkg.description}}</p>
+						<p>The latest version is <var aria-label="Latest version">{{pkg.version}}</var></p>
+						<a href="{{pkg.git_url}}" rel="nofollow noreferrer noopener">Git Repository <span aria-hidden="true" tabindex="-1">&rarr;</span></a>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+	</main>
+	<footer>
+		<p>Copyright 2022 <a href="https://binyam.in/">Binyamin Green</a>. Code is <a href="https://github.com/binyamin/cdn" rel="nofollow noreferrer noopener">on GitHub</a>.</p>
+	</footer>
+</body>
+</html>

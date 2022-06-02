@@ -1,0 +1,7 @@
+[build]
+	publish = "out/"
+	command = "pnpm build"
+
+[[edge_functions]]
+	path = "/pkg/*"
+	function = "pkg"

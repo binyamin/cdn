@@ -1,0 +1,12 @@
+.vscode/
+pkg/
+out/
+
+# Node.js
+node_modules/
+
+# Deno
+vendor/
+
+# Local Netlify folder
+.netlify/

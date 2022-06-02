@@ -1,0 +1,8 @@
+[
+	{
+		"name": "tiny-html-tags",
+		"version": "0.1.0",
+		"description": "A tiny utility for dynamically creating HTML elements",
+		"git_url": "https://github.com/binyamin/tiny-html-tags"
+	}
+]

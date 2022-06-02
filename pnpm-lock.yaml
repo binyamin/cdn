@@ -1,0 +1,78 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@binyamin/njk': github:binyamin/nunjucks-cli
+
+devDependencies:
+  '@binyamin/njk': github.com/binyamin/nunjucks-cli/f5c435058a8da4c15c66912fdadf6bbf0750d1ee
+
+packages:
+
+  /a-sync-waterfall/1.0.1:
+    resolution: {integrity: sha512-RYTOHHdWipFUliRFMCS4X2Yn2X8M87V/OpSqWzKKOGhzqyUxzyVmhHDH9sAvG+ZuQf/TAOFsLCpMw09I1ufUnA==}
+    dev: true
+
+  /argparse/2.0.1:
+    resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+    dev: true
+
+  /asap/2.0.6:
+    resolution: {integrity: sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==}
+    dev: true
+
+  /camelcase/6.3.0:
+    resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
+    engines: {node: '>=10'}
+    dev: true
+
+  /commander/5.1.0:
+    resolution: {integrity: sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==}
+    engines: {node: '>= 6'}
+    dev: true
+
+  /commander/9.3.0:
+    resolution: {integrity: sha512-hv95iU5uXPbK83mjrJKuZyFM/LBAoCV/XhVGkS5Je6tl7sxr6A0ITMw5WoRV46/UaJ46Nllm3Xt7IaJhXTIkzw==}
+    engines: {node: ^12.20.0 || >=14}
+    dev: true
+
+  /dayjs/1.11.2:
+    resolution: {integrity: sha512-F4LXf1OeU9hrSYRPTTj/6FbO4HTjPKXvEIC1P2kcnFurViINCVk3ZV0xAS3XVx9MkMsXbbqlK6hjseaYbgKEHw==}
+    dev: true
+
+  /js-yaml/4.1.0:
+    resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
+    hasBin: true
+    dependencies:
+      argparse: 2.0.1
+    dev: true
+
+  /nunjucks/3.2.3:
+    resolution: {integrity: sha512-psb6xjLj47+fE76JdZwskvwG4MYsQKXUtMsPh6U0YMvmyjRtKRFcxnlXGWglNybtNTNVmGdp94K62/+NjF5FDQ==}
+    engines: {node: '>= 6.9.0'}
+    hasBin: true
+    peerDependencies:
+      chokidar: ^3.3.0
+    peerDependenciesMeta:
+      chokidar:
+        optional: true
+    dependencies:
+      a-sync-waterfall: 1.0.1
+      asap: 2.0.6
+      commander: 5.1.0
+    dev: true
+
+  github.com/binyamin/nunjucks-cli/f5c435058a8da4c15c66912fdadf6bbf0750d1ee:
+    resolution: {tarball: https://codeload.github.com/binyamin/nunjucks-cli/tar.gz/f5c435058a8da4c15c66912fdadf6bbf0750d1ee}
+    name: '@binyamin/njk'
+    version: 0.1.0
+    engines: {node: '>=14.16'}
+    hasBin: true
+    dependencies:
+      camelcase: 6.3.0
+      commander: 9.3.0
+      dayjs: 1.11.2
+      js-yaml: 4.1.0
+      nunjucks: 3.2.3
+    transitivePeerDependencies:
+      - chokidar
+    dev: true
