@@ -1,0 +1,41 @@
+.page {
+	display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+	column-gap: 1.5rem;
+	padding-block: 1rem;
+}
+
+.page > * + *:not(:last-child) {
+	flex-grow: 1;
+}
+
+.wrapper {
+    /* 20rem = 320px, 75rem = 1200px */
+    width: clamp(20rem, 95vw, 75rem);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.document {
+	width: 78ch;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.repel {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gutter, clamp(1rem, 1rem + 0.5vw, 1.5rem));
+}
+
+.cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gutter, 0.5rem);
+    justify-content: flex-start;
+    align-items: center;
+}

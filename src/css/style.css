@@ -1,0 +1,15 @@
+@import '_reset.css';
+@import '_layout.css';
+@import '_base.css';
+
+body {
+	padding: 0 1rem;
+}
+
+body > footer {
+	text-align: center;
+}
+
+body > footer p {
+	margin: 0;
+}

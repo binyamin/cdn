@@ -1,17 +1,17 @@
 {
   "name": "cdn",
-	"private": true,
+  "private": true,
   "version": "0.1.0",
   "description": "",
   "keywords": [],
   "author": "Binyamin Aron Green (https://binyam.in/)",
   "license": "MIT",
-	"main": "index.js",
+  "type": "module",
+  "main": "index.js",
   "scripts": {
-		"build": "njk src/ out/ -d=src/data/packages.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-    "@binyamin/njk": "github:binyamin/nunjucks-cli"
+  "dependencies": {
+    "@cedar/preset": "^0.1.0"
   }
 }

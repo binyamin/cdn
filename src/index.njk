@@ -1,44 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Index | cdn.binyam.in</title>
-	{# <link rel="stylesheet" href="/style.css" /> #}
-</head>
-<body>
-	{# <header></header> #}
-	<main>
-		<h1>Binyamin's CDN</h1>
-		<section>
-			<h2>Usage</h2>
-			<p>The packages are meant to be imported from an ES module. They include the <var>x-typescript-types</var> HTTP header, for Deno usage.</p>
-			{%- capture usage | trim %}
-import { html } from 'https://cdn.binyam.in/pkg/tiny-html-tags@0.1.0';
+{% extends './templates/base.html' %}
 
-document.append(html.p('Hello'));
-			{% endcapture %}
-			<pre class="language-js"><code>{{usage}}</code></pre>
-		</section>
-		<section>
-			<h2>Packages</h2>
-			<p>The following packages are available:</p>
-			<ul role="list">
-				{% for pkg in packages %}
-				<li>
-					<div aria-labelledby="#name-{{pkg.name}}">
-						<p id="name-{{pkg.name}}">{{pkg.name}}</p>
-						<p>{{pkg.description}}</p>
-						<p>The latest version is <var aria-label="Latest version">{{pkg.version}}</var></p>
-						<a href="{{pkg.git_url}}" rel="nofollow noreferrer noopener">Git Repository <span aria-hidden="true" tabindex="-1">&rarr;</span></a>
-					</div>
-				</li>
-				{% endfor %}
-			</ul>
-		</section>
-	</main>
-	<footer>
-		<p>Copyright 2022 <a href="https://binyam.in/">Binyamin Green</a>. Code is <a href="https://github.com/binyamin/cdn" rel="nofollow noreferrer noopener">on GitHub</a>.</p>
-	</footer>
-</body>
-</html>
+{% from './templates/macros.njk' import code %}
+
+{% set title = "Home" %}
+
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/prism-themes@1.9.0/themes/prism-vs.min.css" />
+<script defer src="https://unpkg.com/prismjs@1.28.0/prism.js"></script>
+{% endblock head %}
+
+{% block content %}
+<h1>Binyamin's CDN</h1>
+<p>{{site.description}}</p>
+<section>
+	<h2>Usage</h2>
+	<p>The packages are meant to be imported from within an ES module. They include the <var>x-typescript-types</var> HTTP header, for Deno usage.</p>
+
+	<figure class="box-example">
+		<figcaption>Example</figcaption>
+		{% call code('js') %}
+		import { html } from 'https://cdn.binyam.in/pkg/tiny-html-tags@0.1.0';
+
+		document.append(
+			html.p('Hello')
+		);
+		{% endcall %}
+	</figure>
+</section>
+{% endblock content %}

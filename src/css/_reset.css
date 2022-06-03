@@ -1,0 +1,19 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+body, figure {
+	margin: 0;
+}
+
+:where(ul, ol)[role=list] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a, u, abbr, ins {
+	text-underline-offset: 0.15em;
+}
