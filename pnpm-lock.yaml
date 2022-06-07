@@ -1,11 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@binyamin/cedar': ^0.1.1
+  '@binyamin/cedar': ^0.1.2
   '@binyamin/cedar-preset': ^0.1.0
 
 devDependencies:
-  '@binyamin/cedar': 0.1.1
+  '@binyamin/cedar': 0.1.2
   '@binyamin/cedar-preset': 0.1.0
 
 packages:
@@ -69,8 +69,8 @@ packages:
       - supports-color
     dev: true
 
-  /@binyamin/cedar/0.1.1:
-    resolution: {integrity: sha512-qxT+fD9jSiQNlifNXkLS46bn85LrWwanbmqufCUPmGPEbwmVL/89iY0xHMaB5fotJieHt+05vKib7qOU7wucPQ==, tarball: download/@binyamin/cedar/0.1.1/7f51fc0830ceed84e55bb2985e8a9130b687bef97ec75a3c4d559317c8dd977b}
+  /@binyamin/cedar/0.1.2:
+    resolution: {integrity: sha512-pdEB1MPYecBtltoqfDsK3bGdh5EqA/5F+TZPkayKwhJkDaQJYQXFZD0N3jpj/HWFgtpDdSfVAQqKtOraFhhA4g==, tarball: download/@binyamin/cedar/0.1.2/224263e2517e4d86a6248aa9487127387c149cf03b0e9990bb8f7d41b8fbc8ac}
     hasBin: true
     dependencies:
       '@binyamin/cedar-nunjucks': 0.2.0

@@ -2,6 +2,14 @@
 	publish = "out/"
 	command = "npm run build"
 
+[dev]
+	command = "pnpm dev"
+  targetPort = 3000
+	port = 8080
+	publish = "out/"
+	autoLaunch = false
+	framework = "#custom"
+
 [[edge_functions]]
 	path = "/pkg/*"
 	function = "pkg"

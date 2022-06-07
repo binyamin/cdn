@@ -3,6 +3,7 @@ import path from 'node:path';
 import preset from '@binyamin/cedar-preset';
 
 export default preset({
+	src: 'src',
 	dest: 'out',
 	nunjucks: {
 		data: 'src/data',

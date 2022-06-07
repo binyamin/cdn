@@ -1,6 +1,6 @@
 import type { EdgeFunction } from 'netlify:edge';
 
-const handler: EdgeFunction = async (request, context) => {
+const handler: EdgeFunction = (request, context) => {
 	return Response.json({
 		title: "hello",
 	});
