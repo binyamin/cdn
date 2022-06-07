@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import preset from '@cedar/preset';
+import preset from '@binyamin/cedar-preset';
 
 export default preset({
 	dest: 'out',
