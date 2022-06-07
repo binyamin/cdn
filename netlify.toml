@@ -1,6 +1,6 @@
 [build]
 	publish = "out/"
-	command = "pnpm build"
+	command = "npm run build"
 
 [[edge_functions]]
 	path = "/pkg/*"
