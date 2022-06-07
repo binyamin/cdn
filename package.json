@@ -16,5 +16,6 @@
   "devDependencies": {
     "@binyamin/cedar": "^0.1.1",
     "@binyamin/cedar-preset": "^0.1.0"
-  }
+  },
+	"packageManager": "pnpm@7.1.7"
 }
