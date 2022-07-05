@@ -4,9 +4,8 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>{{ (title ~ " | " ~ site.title) if title is defined else site.title }}</title>
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	{# <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> #}
 	<link rel="stylesheet" href="/css/style.css" />
-	{{ (cedar.livereload if cedar.mode === 'serve') | safe }}
 	{% block head %}{% endblock head %}
 </head>
 <body class="page wrapper">
@@ -20,7 +19,7 @@
 		</nav>
 	</header>
 	<main class="document">
-		{% block content %}{% endblock content %}
+		{{ content | safe }}
 	</main>
 	<footer>
 		<p>Copyright 2022 <a href="https://binyam.in/">Binyamin Green</a>. Code is <a href="https://github.com/binyamin/cdn" rel="nofollow noreferrer noopener">on GitHub</a>.</p>

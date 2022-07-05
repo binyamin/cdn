@@ -1,12 +1,16 @@
 [build]
-	publish = "out/"
-	command = "npm run build"
+	publish = "_site"
+	command = "bash scripts/build.sh"
+
+[functions]
+	# directory = "netlify/functions"
+	node_bundler = "esbuild"
 
 [dev]
-	command = "pnpm dev"
-  targetPort = 3000
+	command = "deno task serve"
+  targetPort = 8000
 	port = 8080
-	publish = "out/"
+	publish = "_site/"
 	autoLaunch = false
 	framework = "#custom"
 

@@ -1,6 +1,8 @@
-@import '_reset.css';
-@import '_layout.css';
-@import '_base.css';
+@charset 'utf8';
+
+@use 'reset';
+@use 'layout';
+@use 'base';
 
 body {
 	padding: 0 1rem;

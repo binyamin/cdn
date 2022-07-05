@@ -1,15 +1,13 @@
-{% extends './templates/base.html' %}
-
-{% from './templates/macros.njk' import code %}
-
-{% set title = "Home" %}
+---
+layout: base.njk
+---
 
 {% block head %}
-<link rel="stylesheet" href="https://unpkg.com/prism-themes@1.9.0/themes/prism-vs.min.css" />
-<script defer src="https://unpkg.com/prismjs@1.28.0/prism.js"></script>
+<link rel="stylesheet" href="/css/prism-vs.min.css" />
 {% endblock head %}
 
-{% block content %}
+{% from 'macros.njk' import code %}
+
 <h1>Binyamin's CDN</h1>
 <p>{{site.description}}</p>
 <section>
@@ -27,4 +25,3 @@
 		{% endcall %}
 	</figure>
 </section>
-{% endblock content %}

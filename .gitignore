@@ -1,6 +1,7 @@
 .vscode/
 pkg/
-out/
+_site/
+extra/
 
 # Node.js
 node_modules/

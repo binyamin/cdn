@@ -1,3 +1,8 @@
 {% macro code(language) %}
-<pre class="{{ class("code-block", "language-" ~ language if language is defined) }}"><code>{{ caller() | trim_lines }}</code></pre>
+<pre class="{{
+	[
+		'code-block',
+		'language-' ~ language if language is defined
+	] | class
+}}"><code>{{ caller() | trim_lines }}</code></pre>
 {% endmacro %}
