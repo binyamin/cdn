@@ -9,6 +9,9 @@ import extras from './helpers/extras.ts';
 
 const site = lume({
 	src: 'src',
+	server: {
+		page404: '/404/index.html'
+	}
 }, {
 	nunjucks: {
 		includes: 'templates',

@@ -2,26 +2,25 @@
 	display: flex;
     flex-direction: column;
     min-height: 100vh;
-	column-gap: 1.5rem;
+	row-gap: 1.5rem;
 	padding-block: 1rem;
 }
 
-.page > * + *:not(:last-child) {
+.page > :not(.page-footer):not(.page-header) {
 	flex-grow: 1;
 }
 
 .wrapper {
     /* 20rem = 320px, 75rem = 1200px */
     width: clamp(20rem, 95vw, 75rem);
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
+	padding-inline: 1rem;
 }
 
 .document {
 	width: 78ch;
 	max-width: 100%;
-	margin-left: auto;
-	margin-right: auto;
+	margin-inline: auto;
 }
 
 .repel {

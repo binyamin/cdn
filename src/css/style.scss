@@ -4,14 +4,10 @@
 @use 'layout';
 @use 'base';
 
-body {
-	padding: 0 1rem;
-}
-
-body > footer {
+.page-footer {
 	text-align: center;
 }
 
-body > footer p {
+.page-footer > p {
 	margin: 0;
 }
