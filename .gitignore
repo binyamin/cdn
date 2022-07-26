@@ -2,6 +2,8 @@
 pkg/
 _site/
 extra/
+.env*
+!.env.example
 
 # Node.js
 node_modules/
