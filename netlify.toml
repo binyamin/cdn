@@ -17,3 +17,8 @@
 [[edge_functions]]
 	path = "/pkg/*"
 	function = "pkg"
+
+[[redirects]]
+	from = "/*"
+	to = "/404"
+	status = 404
