@@ -1,5 +1,5 @@
-import { config } from 'https://deno.land/std@0.149.0/dotenv/mod.ts';
-export const env = await config() as {
+import { configSync } from 'https://deno.land/std@0.149.0/dotenv/mod.ts';
+export const env = configSync() as {
 	GITHUB_TOKEN: string;
 	GITLAB_TOKEN: string;
 };
