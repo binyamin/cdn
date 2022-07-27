@@ -44,6 +44,31 @@ const handler: EdgeFunction = async (request, context) => {
 			headers.set('ETag', file.headers.get('etag')!);
 		}
 
+
+		if (module.path.endsWith('.js')) {
+			try {
+				await getFile({
+					name: module.name,
+					ref: module.ref,
+					path: module.path.replace(/\.js$/, '.d.ts'),
+				});
+
+				headers.set(
+					'X-TypeScript-Types',
+					'./' + path.basename(module.path, '.js') + '.d.ts',
+				);
+			} catch (error) {
+				// Don't throw on 404 - That just means there's no type-definition file
+				if (error instanceof ApiError) {
+					if (error.status !== 404) {
+						throw error;
+					}
+				}
+
+				throw error;
+			}
+		}
+
 		// Caching
 		if (request.headers.has('if-none-match') && headers.has('etag')) {
 			const etag = headers.get('etag')!;
