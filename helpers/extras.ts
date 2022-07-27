@@ -11,8 +11,9 @@ const plugin: Plugin = (site) => {
 		});
 
 		// How many characters should we trim from every line?
-		const lowestSize =
-			indentSizes.filter((l) => l !== 0).sort((a, b) => a - b)[0];
+		const lowestSize = indentSizes.filter((l) =>
+			l !== 0
+		).sort((a, b) => a - b)[0];
 
 		if (lowestSize) {
 			return lines.map((l) => l.slice(lowestSize)).join('\n').trim();
@@ -20,6 +21,6 @@ const plugin: Plugin = (site) => {
 
 		return content;
 	});
-}
+};
 
 export default plugin;
