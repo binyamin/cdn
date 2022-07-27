@@ -1,12 +1,22 @@
 import { configSync } from 'https://deno.land/std@0.149.0/dotenv/mod.ts';
 
-const env = configSync() as {
+let env: {
 	GITHUB_TOKEN: string;
 	GITLAB_TOKEN: string;
 };
 
-env.GITHUB_TOKEN ??= Deno.env.get('GITHUB_TOKEN')!;
-env.GITLAB_TOKEN ??= Deno.env.get('GITLAB_TOKEN')!;
+try {
+	env = configSync() as {
+		GITHUB_TOKEN: string;
+		GITLAB_TOKEN: string;
+	};
+} catch {
+	// There's no file, or we can't access it
+	env = {
+		GITHUB_TOKEN: Deno.env.get('GITHUB_TOKEN')!,
+		GITLAB_TOKEN: Deno.env.get('GITLAB_TOKEN')!,
+	}
+}
 
 export { env };
 
