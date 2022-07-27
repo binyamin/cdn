@@ -1,6 +1,6 @@
 import { base64, env } from './deps.ts';
 import type { File, Module } from '../common.ts';
-import { ApiError } from '../common.ts';
+import { createHttpError } from "../http.ts";
 
 function apiUrl(raw: TemplateStringsArray, ...args: unknown[]) {
 	const path = String.raw(raw, ...args);
@@ -37,7 +37,7 @@ async function apiRequest<ResponseData>(
 		};
 	}
 
-	throw new ApiError(response.statusText, { status: response.status });
+	throw createHttpError(response.status, response.statusText);
 }
 
 export async function getFile(module: Module): Promise<{

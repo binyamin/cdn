@@ -3,8 +3,8 @@ import { compareEtag } from 'https://deno.land/std@0.149.0/http/util.ts';
 
 import type { EdgeFunction } from 'netlify:edge';
 
-import { ApiError, type Module } from './lib/common.ts';
-import { contentType } from './lib/http.ts';
+import { type Module } from './lib/common.ts';
+import * as http from './lib/http.ts';
 import { getFile } from './lib/api/gitlab.ts';
 
 const pattern = new URLPattern({
@@ -29,11 +29,15 @@ const handler: EdgeFunction = async (request, context) => {
 		module.ref = 'latest';
 	}
 
+	function logRequest(status: number) {
+		context.log(`${status} - ${module.name}@${module.ref}/${module.path}`);
+	}
+
 	try {
 		const file = await getFile(module);
 		const headers = new Headers();
 
-		const cType = contentType(path.basename(file.file.path));
+		const cType = http.contentType(path.basename(file.file.path));
 
 		if (cType) {
 			headers.set('content-type', cType);
@@ -44,7 +48,7 @@ const handler: EdgeFunction = async (request, context) => {
 			headers.set('ETag', file.headers.get('etag')!);
 		}
 
-
+		// If possible, supply `X-TypeScript-Types` HTTP header
 		if (module.path.endsWith('.js')) {
 			try {
 				await getFile({
@@ -59,7 +63,7 @@ const handler: EdgeFunction = async (request, context) => {
 				);
 			} catch (error) {
 				// Don't throw on 404 - That just means there's no type-definition file
-				if (error instanceof ApiError) {
+				if (http.isHttpError(error)) {
 					if (error.status !== 404) {
 						throw error;
 					}
@@ -75,35 +79,37 @@ const handler: EdgeFunction = async (request, context) => {
 			const prevETag = request.headers.get('if-none-match')!;
 
 			if (compareEtag(etag, prevETag)) {
+				logRequest(304);
 				return new Response(null, {
 					status: 304,
-					statusText: 'Not Modified',
 					headers,
 				});
 			}
 		}
 
+		logRequest(200);
 		return new Response(file.file.content, {
 			headers: headers,
 			status: 200,
 		});
 	} catch (error) {
-		if (error instanceof ApiError) {
+		if (http.isHttpError(error)) {
 			const { pathname } = new URL(request.url);
 
 			if (error.status === 404) {
 				return context.next();
 			}
 
-			context.log(`Received bad HTTP status-code while fetching ${pathname}.`, {
+			context.log(`Received bad HTTP Status while fetching file`, {
 				message: error.message,
 				status: error.status,
+				path: pathname,
 			});
 
 			return new Response(undefined, {
-				status: 500,
-				statusText: 'Internal Server Error',
-			});
+				status: error.status,
+				statusText: error.message,
+			})
 		}
 
 		throw error;

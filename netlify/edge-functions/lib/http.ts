@@ -14,3 +14,5 @@ export function contentType(fileName: string) {
 		if (type) return type;
 	}
 }
+
+export { createHttpError, isHttpError } from "https://deno.land/std@0.149.0/http/http_errors.ts";
