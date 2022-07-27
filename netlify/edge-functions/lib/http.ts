@@ -15,4 +15,7 @@ export function contentType(fileName: string) {
 	}
 }
 
-export { createHttpError, isHttpError } from "https://deno.land/std@0.149.0/http/http_errors.ts";
+export {
+	createHttpError,
+	isHttpError,
+} from 'https://deno.land/std@0.149.0/http/http_errors.ts';

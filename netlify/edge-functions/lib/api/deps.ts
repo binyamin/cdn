@@ -15,7 +15,7 @@ try {
 	env = {
 		GITHUB_TOKEN: Deno.env.get('GITHUB_TOKEN')!,
 		GITLAB_TOKEN: Deno.env.get('GITLAB_TOKEN')!,
-	}
+	};
 }
 
 export { env };

@@ -109,7 +109,7 @@ const handler: EdgeFunction = async (request, context) => {
 			return new Response(undefined, {
 				status: error.status,
 				statusText: error.message,
-			})
+			});
 		}
 
 		throw error;
