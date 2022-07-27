@@ -1,4 +1,4 @@
-import { env, base64 } from './deps.ts';
+import { base64, env } from './deps.ts';
 import type { File, Module } from '../common.ts';
 import { ApiError } from '../common.ts';
 
@@ -9,13 +9,15 @@ function apiUrl(raw: TemplateStringsArray, ...args: unknown[]) {
 
 // deno-lint-ignore no-explicit-any
 interface ApiResponse<Data = any> {
-	headers: Headers,
+	headers: Headers;
 	data: Data;
 	status: number;
 	statusText: string;
 }
 
-async function apiRequest<ResponseData>(path: string): Promise<ApiResponse<ResponseData>> {
+async function apiRequest<ResponseData>(
+	path: string,
+): Promise<ApiResponse<ResponseData>> {
 	const url = apiUrl`${path}`;
 
 	const response = await fetch(url, {
@@ -32,33 +34,33 @@ async function apiRequest<ResponseData>(path: string): Promise<ApiResponse<Respo
 			data,
 			status: response.status,
 			statusText: response.statusText,
-		}
+		};
 	}
 
 	throw new ApiError(response.statusText, { status: response.status });
 }
 
 export async function getFile(module: Module): Promise<{
-	file: File,
-	headers: Headers,
+	file: File;
+	headers: Headers;
 }> {
 	const id = encodeURIComponent('binyamin/' + module.name);
 	const filePath = encodeURIComponent(module.path);
 
 	const response = await apiRequest<{
-		file_name: string,
-		file_path: string,
-		size: number,
-		encoding: 'base64',
-		content: string,
-		content_sha256: string,
-		ref: string,
-		blob_id: string,
-		commit_id: string,
-		last_commit_id: string,
-		execute_filemode: boolean,
+		file_name: string;
+		file_path: string;
+		size: number;
+		encoding: 'base64';
+		content: string;
+		content_sha256: string;
+		ref: string;
+		blob_id: string;
+		commit_id: string;
+		last_commit_id: string;
+		execute_filemode: boolean;
 	}>(
-		`/projects/${id}/repository/files/${filePath}?ref=${module.ref}`
+		`/projects/${id}/repository/files/${filePath}?ref=${module.ref}`,
 	);
 
 	return {
@@ -66,8 +68,8 @@ export async function getFile(module: Module): Promise<{
 		file: {
 			path: module.path,
 			content: base64.decode(response.data.content),
-		}
-	}
+		},
+	};
 }
 
 // async function getTags(repo: string, owner = 'binyamin') {

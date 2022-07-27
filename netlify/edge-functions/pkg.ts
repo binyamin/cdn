@@ -8,7 +8,8 @@ import { contentType } from './lib/http.ts';
 import { getFile } from './lib/api/gitlab.ts';
 
 const pattern = new URLPattern({
-	pathname: '/pkg/:name([a-zA-Z_\\-0-9]+){@:version([a-zA-Z_\\-0-9\\.]+)}?/:path+',
+	pathname:
+		'/pkg/:name([a-zA-Z_\\-0-9]+){@:version([a-zA-Z_\\-0-9\\.]+)}?/:path+',
 });
 
 const handler: EdgeFunction = async (request, context) => {
@@ -20,7 +21,7 @@ const handler: EdgeFunction = async (request, context) => {
 		name: matches.pathname.groups.name,
 		ref: matches.pathname.groups.version,
 		path: matches.pathname.groups.path,
-	}
+	};
 
 	if (!module.ref) {
 		// TODO replace with latest tag or default branch
@@ -63,7 +64,7 @@ const handler: EdgeFunction = async (request, context) => {
 		});
 	} catch (error) {
 		if (error instanceof ApiError) {
-			const {pathname} = new URL(request.url);
+			const { pathname } = new URL(request.url);
 
 			if (error.status === 404) {
 				return context.next();
@@ -77,11 +78,11 @@ const handler: EdgeFunction = async (request, context) => {
 			return new Response(undefined, {
 				status: 500,
 				statusText: 'Internal Server Error',
-			})
+			});
 		}
 
 		throw error;
 	}
-}
+};
 
 export default handler;
