@@ -1,4 +1,4 @@
-import { configSync } from 'https://deno.land/std@0.149.0/dotenv/mod.ts';
+import { configSync } from 'https://deno.land/std@0.151.0/dotenv/mod.ts';
 
 let env: {
 	GITHUB_TOKEN: string;
@@ -20,5 +20,5 @@ try {
 
 export { env };
 
-import { decode } from 'https://deno.land/std@0.149.0/encoding/base64.ts';
+import { decode } from 'https://deno.land/std@0.151.0/encoding/base64.ts';
 export const base64 = { decode };
