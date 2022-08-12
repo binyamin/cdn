@@ -72,9 +72,57 @@ export async function getFile(module: Module): Promise<{
 	};
 }
 
-// async function getTags(repo: string, owner = 'binyamin') {
-// 	const id = encodeURIComponent(owner + '/' + repo);
-// 	const response = await apiRequest(`/projects/${id}/repository/tags`);
+/**
+ *
+ * @param search You can use `^term` and `term$` to find tags that begin and end with `term` respectively.
+ */
+export async function listTags(repository: string, search?: string): Promise<{
+	tags: {
+		name: string,
+		date: Date,
+		url: string
+	}[],
+	headers: Headers,
+}> {
+	const id = encodeURIComponent('binyamin/' + repository);
 
-// 	return response;
-// }
+	const response = await apiRequest<{
+		commit: {
+			id: string,
+			short_id: string,
+			title: string,
+			created_at: string,
+			parent_ids: string[],
+			message: string,
+			author_name: string,
+			author_email: string,
+			authored_date: string,
+			committer_name: string,
+			committer_email: string,
+			committed_date: string,
+			trailers: unknown,
+			web_url: string
+		},
+		release?: {
+			tag_name: string,
+			description: string
+		},
+		name: string,
+		target: string,
+		message?: string,
+		protected: boolean
+	}[]>(
+		`/projects/${id}/repository/tags${
+			search ? '?search=' + encodeURIComponent(search) : ""
+		}`
+	);
+
+	return {
+		headers: response.headers,
+		tags: response.data.map(tag => ({
+			name: tag.name,
+			date: new Date(tag.commit.authored_date),
+			url: tag.commit.web_url
+		}))
+	}
+}

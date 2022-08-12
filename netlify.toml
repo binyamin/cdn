@@ -24,6 +24,11 @@
 	path = "/api/x/*"
 	function = "api-pkg"
 
+# API - version completion
+[[edge_functions]]
+	path = "/api/x/*/versions/*"
+	function = "api-version"
+
 [[redirects]]
 	from = "/*"
 	to = "/404"
