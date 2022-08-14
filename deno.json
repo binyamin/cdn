@@ -1,12 +1,21 @@
 {
 	"lint": {
 		"files": {
-			"exclude": ["extra/", "pkg/", ".netlify/"]
+			"exclude": [
+				"extra/",
+				"pkg/",
+				".netlify/"
+			]
 		}
 	},
 	"fmt": {
 		"files": {
-			"exclude": ["extra/", "pkg/", ".github/"]
+			"exclude": [
+				"extra/",
+				"pkg/",
+				".github/",
+				".netlify/"
+			]
 		},
 		"options": {
 			"useTabs": true,

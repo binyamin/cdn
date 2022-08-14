@@ -1,5 +1,5 @@
-import * as path from 'https://deno.land/std@0.151.0/path/mod.ts';
-import { compareEtag } from 'https://deno.land/std@0.151.0/http/util.ts';
+import * as path from 'https://deno.land/std@0.152.0/path/mod.ts';
+import { compareEtag } from 'https://deno.land/std@0.152.0/http/util.ts';
 
 import type { EdgeFunction } from 'netlify:edge';
 

@@ -3,7 +3,7 @@ import {
 	assertEquals,
 	assertExists,
 	assertFalse,
-} from 'https://deno.land/std@0.151.0/testing/asserts.ts';
+} from 'https://deno.land/std@0.152.0/testing/asserts.ts';
 
 Deno.test('Fetching Packages', async (t) => {
 	const baseUrl = 'http://localhost:8080';

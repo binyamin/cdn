@@ -1,4 +1,4 @@
-import * as media from 'https://deno.land/std@0.151.0/media_types/mod.ts';
+import * as media from 'https://deno.land/std@0.152.0/media_types/mod.ts';
 
 export function contentType(fileName: string) {
 	if (/\.[mc]?js$/i.test(fileName)) {

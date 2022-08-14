@@ -1,6 +1,6 @@
 {
 	"imports": {
 		"netlify:edge": "https://edge-bootstrap.netlify.app/v1/index.ts",
-		"lume/": "https://deno.land/x/lume@v1.10.1/"
+		"lume/": "https://deno.land/x/lume@v1.10.4/"
 	}
 }
