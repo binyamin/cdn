@@ -16,8 +16,6 @@ const handler: EdgeFunction = async (request, context) => {
 
 	const groups = matches.pathname.groups;
 
-	context.log(groups);
-
 	const result = await listPaths(
 		groups.package,
 		groups.version,
