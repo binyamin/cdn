@@ -127,3 +127,29 @@ export async function listTags(repository: string, search?: string): Promise<{
 		}))
 	}
 }
+
+/**
+ *
+ * @see {@link https://docs.gitlab.com/ee/api/repositories.html#list-repository-tree GitLab API Docs}
+ */
+export async function listPaths(repository: string, tag: string): Promise<{
+	paths: string[],
+	headers: Headers
+}> {
+	const id = encodeURIComponent('binyamin/' + repository);
+
+	const response = await apiRequest<{
+		id: string,
+		name: string,
+		type: 'tree' | 'blob',
+		path: string,
+		mode: string,
+	}[]>(
+		`/projects/${id}/repository/tree?recursive=true&ref=${tag}`
+	);
+
+	return {
+		headers: response.headers,
+		paths: response.data.filter(item => item.type === 'blob').map(item => item.path),
+	}
+}
