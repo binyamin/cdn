@@ -19,6 +19,7 @@ const site = lume({
 });
 
 site.copy('static', '.');
+site.copy('static/.well-known', '.well-known');
 
 site.use(extras);
 site.use(attributes());
