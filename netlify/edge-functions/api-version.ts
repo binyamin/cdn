@@ -7,7 +7,7 @@ import type { CompletionList } from './api/types.ts';
 import { listTags } from './lib/api/gitlab.ts';
 
 const pattern = new URLPattern({
-	pathname: '/api/x/:package([a-zA-Z_\\-0-9]+)/versions/:version([a-zA-Z0-9\\.+-]*)',
+	pathname: '/api/x/:package([a-zA-Z0-9_-]+)/versions/:version([a-zA-Z0-9\\.+-]*)',
 });
 
 const handler: EdgeFunction = async (request, context) => {
@@ -35,7 +35,7 @@ const handler: EdgeFunction = async (request, context) => {
 		items: tags.map(v => v.name),
 		isIncomplete: true,
 	};
-	
+
 	if (tags.length > 0) {
 		// Only preselect an item when possible
 		list.preselect = tags[0].name;

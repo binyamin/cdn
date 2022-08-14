@@ -5,7 +5,7 @@ import type { EdgeFunction } from 'netlify:edge';
 import type { CompletionList } from './api/types.ts';
 
 const pattern = new URLPattern({
-	pathname: '/api/x/:package([a-zA-Z_\\-0-9]*)',
+	pathname: '/api/x/:package([a-zA-Z0-9_-]*)',
 });
 
 const handler: EdgeFunction = async (request, context) => {

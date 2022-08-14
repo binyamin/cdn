@@ -9,7 +9,7 @@ import { getFile } from './lib/api/gitlab.ts';
 
 const pattern = new URLPattern({
 	pathname:
-		'/x/:name([a-zA-Z_\\-0-9]+){@:version([a-zA-Z_\\-0-9\\.]+)}?/:path+',
+		'/x/:name([a-zA-Z0-9_-]+){@:version([a-zA-Z0-9\\.+-]+)}?/:path+',
 });
 
 const handler: EdgeFunction = async (request, context) => {

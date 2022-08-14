@@ -74,7 +74,8 @@ export async function getFile(module: Module): Promise<{
 
 /**
  *
- * @param search You can use `^term` and `term$` to find tags that begin and end with `term` respectively.
+ * @param search You can use `^term` and `term$` to find
+ * tags that begin and end with `term` respectively.
  */
 export async function listTags(repository: string, search?: string): Promise<{
 	tags: {
