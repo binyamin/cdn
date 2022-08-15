@@ -19,3 +19,9 @@ export {
 	createHttpError,
 	isHttpError,
 } from 'https://deno.land/std@0.149.0/http/http_errors.ts';
+
+export {
+	Status,
+	STATUS_TEXT,
+	isServerErrorStatus
+} from 'https://deno.land/std@0.152.0/http/http_status.ts'
