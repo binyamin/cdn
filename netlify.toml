@@ -34,6 +34,11 @@
 	path = "/api/x/*/*/paths/*"
 	function = "api-path"
 
+# API - package documentation
+[[edge_functions]]
+	path = "/api/x/details/*"
+	function = "api-details"
+
 [[redirects]]
 	from = "/*"
 	to = "/404"

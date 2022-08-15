@@ -11,6 +11,7 @@
 				},
 				{
 					"key": "version",
+					"documentation": "/api/x/details/${package}/${{version}}",
 					"url": "/api/x/${package}/versions/${{version}}"
 				},
 				{

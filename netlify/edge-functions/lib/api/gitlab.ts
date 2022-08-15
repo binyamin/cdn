@@ -153,3 +153,32 @@ export async function listPaths(repository: string, tag: string): Promise<{
 		paths: response.data.filter(item => item.type === 'blob').map(item => item.path),
 	}
 }
+
+/**
+ *
+ * @see {@link https://docs.gitlab.com/ee/api/projects.html#get-single-project GitLab API Docs}
+ */
+ export async function getDetails(repository: string): Promise<{
+	name: string,
+	url: string,
+	description?: string,
+	headers: Headers
+}> {
+	const id = encodeURIComponent('binyamin/' + repository);
+
+	const response = await apiRequest<{
+		name: string,
+		web_url: string,
+		description?: string,
+		topics: string[],
+		// There's more data in the response
+		[x: string]: unknown,
+	}>(`/projects/${id}`);
+
+	return {
+		headers: response.headers,
+		name: response.data.name,
+		url: response.data.web_url,
+		description: response.data.description,
+	}
+}
