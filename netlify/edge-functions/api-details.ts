@@ -23,9 +23,9 @@ const handler: EdgeFunction = async (request, context) => {
 		value: `**${details.name}**${
 			groups.version ? groups.version.replace(/^v?(.+)/, ' (v$1)') : ''
 		}\n\n${
-			details.description ? details.description + '\n\n': ''
+			details.description ? details.description + '\n\n' : ''
 		}[code](${details.url})`,
-	}
+	};
 
 	const etag = await getETag(JSON.stringify(result));
 
@@ -35,7 +35,7 @@ const handler: EdgeFunction = async (request, context) => {
 		if (compareEtag(etag, prevEtag)) {
 			return new Response(null, {
 				status: 304,
-			})
+			});
 		}
 	}
 
@@ -43,8 +43,8 @@ const handler: EdgeFunction = async (request, context) => {
 		status: 200,
 		headers: {
 			'ETag': etag,
-		}
-	})
+		},
+	});
 };
 
 export default handler;

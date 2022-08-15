@@ -7,7 +7,8 @@ import type { CompletionList } from './lib/deno-types.ts';
 import { listTags } from './lib/api/gitlab.ts';
 
 const pattern = new URLPattern({
-	pathname: '/api/x/:package([a-zA-Z0-9_-]+)/versions/:version([a-zA-Z0-9\\.+-]*)',
+	pathname:
+		'/api/x/:package([a-zA-Z0-9_-]+)/versions/:version([a-zA-Z0-9\\.+-]*)',
 });
 
 const handler: EdgeFunction = async (request, context) => {
@@ -19,10 +20,10 @@ const handler: EdgeFunction = async (request, context) => {
 
 	const response = await listTags(
 		groups.package,
-		typeof groups.version !== 'undefined' ? '^' + groups.version : undefined
+		typeof groups.version !== 'undefined' ? '^' + groups.version : undefined,
 	);
 
-	const tags = response.tags.filter(v => {
+	const tags = response.tags.filter((v) => {
 		return semver.valid(v.name);
 	}).sort((a, b) => {
 		// The `semver.compareBuild` function sorts in
@@ -32,7 +33,7 @@ const handler: EdgeFunction = async (request, context) => {
 	});
 
 	const list: CompletionList = {
-		items: tags.map(v => v.name),
+		items: tags.map((v) => v.name),
 		isIncomplete: true,
 	};
 
@@ -49,7 +50,7 @@ const handler: EdgeFunction = async (request, context) => {
 		if (compareEtag(etag, prevEtag)) {
 			return new Response(null, {
 				status: 304,
-			})
+			});
 		}
 	}
 
@@ -57,8 +58,8 @@ const handler: EdgeFunction = async (request, context) => {
 		status: 200,
 		headers: {
 			'ETag': etag,
-		}
-	})
-}
+		},
+	});
+};
 
 export default handler;

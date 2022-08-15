@@ -24,6 +24,6 @@ export interface CompletionList {
  * @note Taken from {@link https://deno.land/manual/language_server/imports}
  */
 export interface Documentation {
-  kind: "markdown" | "plaintext";
-  value: string;
+	kind: 'markdown' | 'plaintext';
+	value: string;
 }

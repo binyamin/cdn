@@ -31,7 +31,7 @@ Deno.test('Listing versions', async (t) => {
 		assertExists<CompletionList>(list);
 		assertExists(list.items);
 		assert(Array.isArray(list.items), 'Expected "list.items" to be Array');
-	})
+	});
 
 	await t.step('Accepts conditional requests', async () => {
 		const response = await fetch(
@@ -49,8 +49,8 @@ Deno.test('Listing versions', async (t) => {
 
 	await t.step('Accepts a search term', async () => {
 		const response = await fetch(
-			new URL('/api/x/lume-sass/v0.2.0/paths/m', baseUrl)
-		)
+			new URL('/api/x/lume-sass/v0.2.0/paths/m', baseUrl),
+		);
 
 		assertEquals(response.status, 200);
 		assert(response.body);
@@ -59,5 +59,5 @@ Deno.test('Listing versions', async (t) => {
 		for (const str of body.items) {
 			assertMatch(str, /^m/);
 		}
-	})
+	});
 });

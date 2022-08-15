@@ -21,13 +21,13 @@ const handler: EdgeFunction = async (request, context) => {
 			'lume-parcel-css',
 			'lume-sass',
 			'tiny-html-events',
-		]
-	}
+		],
+	};
 
 	const { package: pkgName } = matches.pathname.groups;
 
 	if (pkgName) {
-		list.items = list.items.filter(value => value.startsWith(pkgName));
+		list.items = list.items.filter((value) => value.startsWith(pkgName));
 		list.preselect = list.items[0];
 	}
 
@@ -41,7 +41,7 @@ const handler: EdgeFunction = async (request, context) => {
 		if (compareEtag(etag, prevEtag)) {
 			return new Response(null, {
 				status: 304,
-			})
+			});
 		}
 	}
 
@@ -49,8 +49,8 @@ const handler: EdgeFunction = async (request, context) => {
 		status: 200,
 		headers: {
 			'ETag': etag,
-		}
-	})
-}
+		},
+	});
+};
 
 export default handler;

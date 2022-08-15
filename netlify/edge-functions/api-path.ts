@@ -4,10 +4,16 @@ import { calculate as getETag } from 'https://deno.land/x/oak@v10.6.0/etag.ts';
 import type { EdgeFunction } from 'netlify:edge';
 import type { CompletionList } from './lib/deno-types.ts';
 import { listPaths } from './lib/api/gitlab.ts';
-import { isHttpError, isServerErrorStatus, Status, STATUS_TEXT } from './lib/http.ts';
+import {
+	isHttpError,
+	isServerErrorStatus,
+	Status,
+	STATUS_TEXT,
+} from './lib/http.ts';
 
 const pattern = new URLPattern({
-	pathname: '/api/x/:package([a-zA-Z0-9_-]+)/:version([a-zA-Z0-9\\.+-]+)/paths/:path*',
+	pathname:
+		'/api/x/:package([a-zA-Z0-9_-]+)/:version([a-zA-Z0-9\\.+-]+)/paths/:path*',
 });
 
 const handler: EdgeFunction = async (request, context) => {
@@ -30,7 +36,7 @@ const handler: EdgeFunction = async (request, context) => {
 
 		// If search-term is provided, fill the `preselect` field
 		if (groups.path) {
-			list.items = list.items.filter(p => p.startsWith(groups.path)).sort();
+			list.items = list.items.filter((p) => p.startsWith(groups.path)).sort();
 			list.preselect = list.items[0];
 		}
 
@@ -42,7 +48,7 @@ const handler: EdgeFunction = async (request, context) => {
 			if (compareEtag(etag, prevEtag)) {
 				return new Response(null, {
 					status: 304,
-				})
+				});
 			}
 		}
 
@@ -50,9 +56,9 @@ const handler: EdgeFunction = async (request, context) => {
 			status: 200,
 			headers: {
 				'ETag': etag,
-			}
-		})
-	} catch(error) {
+			},
+		});
+	} catch (error) {
 		if (isHttpError(error)) {
 			const url = (new URL(request.url)).pathname;
 
@@ -67,17 +73,17 @@ const handler: EdgeFunction = async (request, context) => {
 				return context.json({
 					message: error.message,
 					code: error.status,
-				})
+				});
 			} else {
 				return context.json({
 					message: STATUS_TEXT[Status.InternalServerError],
 					code: Status.InternalServerError,
-				})
+				});
 			}
 		}
 
 		throw error;
 	}
-}
+};
 
 export default handler;

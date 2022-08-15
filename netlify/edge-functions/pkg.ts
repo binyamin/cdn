@@ -8,8 +8,7 @@ import * as http from './lib/http.ts';
 import { getFile } from './lib/api/gitlab.ts';
 
 const pattern = new URLPattern({
-	pathname:
-		'/x/:name([a-zA-Z0-9_-]+){@:version([a-zA-Z0-9\\.+-]+)}?/:path+',
+	pathname: '/x/:name([a-zA-Z0-9_-]+){@:version([a-zA-Z0-9\\.+-]+)}?/:path+',
 });
 
 const handler: EdgeFunction = async (request, context) => {
