@@ -2,7 +2,7 @@ import { compareEtag } from 'https://deno.land/std@0.151.0/http/util.ts';
 import { calculate as getETag } from 'https://deno.land/x/oak@v10.6.0/etag.ts';
 
 import type { EdgeFunction } from 'netlify:edge';
-import type { Documentation } from './api/types.ts';
+import type { Documentation } from './lib/deno-types.ts';
 import { getDetails } from './lib/api/gitlab.ts';
 
 const pattern = new URLPattern({

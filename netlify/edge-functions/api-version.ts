@@ -3,7 +3,7 @@ import { calculate as getETag } from 'https://deno.land/x/oak@v10.6.0/etag.ts';
 import * as semver from 'https://deno.land/std@0.151.0/semver/mod.ts';
 
 import type { EdgeFunction } from 'netlify:edge';
-import type { CompletionList } from './api/types.ts';
+import type { CompletionList } from './lib/deno-types.ts';
 import { listTags } from './lib/api/gitlab.ts';
 
 const pattern = new URLPattern({
