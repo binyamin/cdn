@@ -72,9 +72,112 @@ export async function getFile(module: Module): Promise<{
 	};
 }
 
-// async function getTags(repo: string, owner = 'binyamin') {
-// 	const id = encodeURIComponent(owner + '/' + repo);
-// 	const response = await apiRequest(`/projects/${id}/repository/tags`);
+/**
+ * @param search You can use `^term` and `term$` to find
+ * tags that begin and end with `term` respectively.
+ */
+export async function listTags(repository: string, search?: string): Promise<{
+	tags: {
+		name: string;
+		date: Date;
+		url: string;
+	}[];
+	headers: Headers;
+}> {
+	const id = encodeURIComponent('binyamin/' + repository);
 
-// 	return response;
-// }
+	const response = await apiRequest<{
+		commit: {
+			id: string;
+			short_id: string;
+			title: string;
+			created_at: string;
+			parent_ids: string[];
+			message: string;
+			author_name: string;
+			author_email: string;
+			authored_date: string;
+			committer_name: string;
+			committer_email: string;
+			committed_date: string;
+			trailers: unknown;
+			web_url: string;
+		};
+		release?: {
+			tag_name: string;
+			description: string;
+		};
+		name: string;
+		target: string;
+		message?: string;
+		protected: boolean;
+	}[]>(
+		`/projects/${id}/repository/tags${
+			search ? '?search=' + encodeURIComponent(search) : ''
+		}`,
+	);
+
+	return {
+		headers: response.headers,
+		tags: response.data.map((tag) => ({
+			name: tag.name,
+			date: new Date(tag.commit.authored_date),
+			url: tag.commit.web_url,
+		})),
+	};
+}
+
+/**
+ * @see {@link https://docs.gitlab.com/ee/api/repositories.html#list-repository-tree GitLab API Docs}
+ */
+export async function listPaths(repository: string, tag: string): Promise<{
+	paths: string[];
+	headers: Headers;
+}> {
+	const id = encodeURIComponent('binyamin/' + repository);
+
+	const response = await apiRequest<{
+		id: string;
+		name: string;
+		type: 'tree' | 'blob';
+		path: string;
+		mode: string;
+	}[]>(
+		`/projects/${id}/repository/tree?recursive=true&ref=${tag}`,
+	);
+
+	return {
+		headers: response.headers,
+		paths: response.data.filter((item) => item.type === 'blob').map((item) =>
+			item.path
+		),
+	};
+}
+
+/**
+ * @see {@link https://docs.gitlab.com/ee/api/projects.html#get-single-project GitLab API Docs}
+ */
+export async function getDetails(repository: string): Promise<{
+	name: string;
+	url: string;
+	description?: string;
+	headers: Headers;
+}> {
+	const id = encodeURIComponent('binyamin/' + repository);
+
+	const response = await apiRequest<{
+		name: string;
+		web_url: string;
+		description?: string;
+		topics: string[];
+		// There's more data in the response
+		[x: string]: unknown;
+	}>(`/projects/${id}`);
+
+	return {
+		headers: response.headers,
+		name: response.data.name,
+		url: response.data.web_url,
+		description: response.data.description,
+	};
+}

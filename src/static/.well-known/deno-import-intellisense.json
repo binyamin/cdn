@@ -1,0 +1,24 @@
+{
+	"version": 2,
+	"registries": [
+		{
+			"schema": "/x/:package([a-zA-Z0-9_-]+)@:version/:path+",
+			"variables": [
+				{
+					"key": "package",
+					"documentation": "/api/x/details/${package}",
+					"url": "/api/x/${package}"
+				},
+				{
+					"key": "version",
+					"documentation": "/api/x/details/${package}/${{version}}",
+					"url": "/api/x/${package}/versions/${{version}}"
+				},
+				{
+					"key": "path",
+					"url": "/api/x/${package}/${{version}}/paths/${path}"
+				}
+			]
+		}
+	]
+}

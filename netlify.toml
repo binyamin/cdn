@@ -14,9 +14,30 @@
 	autoLaunch = false
 	framework = "#custom"
 
+# Package endpoint
 [[edge_functions]]
 	path = "/x/*"
 	function = "pkg"
+
+# API - package completion
+[[edge_functions]]
+	path = "/api/x/*"
+	function = "api-pkg"
+
+# API - version completion
+[[edge_functions]]
+	path = "/api/x/*/versions/*"
+	function = "api-version"
+
+# API - path completion
+[[edge_functions]]
+	path = "/api/x/*/*/paths/*"
+	function = "api-path"
+
+# API - package documentation
+[[edge_functions]]
+	path = "/api/x/details/*"
+	function = "api-details"
 
 [[redirects]]
 	from = "/*"
