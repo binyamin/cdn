@@ -4,8 +4,8 @@ import {
 	assertExists,
 	assertFalse,
 	assertMatch,
-} from 'https://deno.land/std@0.151.0/testing/asserts.ts';
-import type { CompletionList } from '../../netlify/edge-functions/api/types.ts';
+	type CompletionList,
+} from '../deps.ts';
 
 Deno.test('Listing packages', async (t) => {
 	const baseUrl = 'http://localhost:8080';

@@ -1,10 +1,8 @@
-import { compareEtag } from 'https://deno.land/std@0.151.0/http/util.ts';
-import { calculate as getETag } from 'https://deno.land/x/oak@v10.6.0/etag.ts';
-import * as semver from 'https://deno.land/std@0.151.0/semver/mod.ts';
-
 import type { EdgeFunction } from 'netlify:edge';
+import { semver } from './lib/deps.ts';
 import type { CompletionList } from './lib/deno-types.ts';
 import { listTags } from './lib/api/gitlab.ts';
+import { etag } from './lib/http.ts';
 
 const pattern = new URLPattern({
 	pathname:
@@ -42,12 +40,12 @@ const handler: EdgeFunction = async (request, context) => {
 		list.preselect = tags[0].name;
 	}
 
-	const etag = await getETag(JSON.stringify(list));
+	const nextETag = await etag.calculate(JSON.stringify(list));
 
 	if (request.headers.has('if-none-match')) {
 		const prevEtag = request.headers.get('if-none-match')!;
 
-		if (compareEtag(etag, prevEtag)) {
+		if (etag.compare(nextETag, prevEtag)) {
 			return new Response(null, {
 				status: 304,
 			});
@@ -57,7 +55,7 @@ const handler: EdgeFunction = async (request, context) => {
 	return context.json(list, {
 		status: 200,
 		headers: {
-			'ETag': etag,
+			'ETag': nextETag,
 		},
 	});
 };

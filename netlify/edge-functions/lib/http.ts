@@ -1,3 +1,22 @@
+export {
+	createHttpError,
+	isHttpError,
+} from 'https://deno.land/std@0.152.0/http/http_errors.ts';
+
+export {
+	isServerErrorStatus,
+	Status,
+	STATUS_TEXT,
+} from 'https://deno.land/std@0.152.0/http/http_status.ts';
+
+import { compareEtag } from 'https://deno.land/std@0.152.0/http/util.ts';
+import { calculate as getETag } from 'https://deno.land/x/oak@v10.6.0/etag.ts';
+
+export const etag = {
+	compare: compareEtag,
+	calculate: getETag,
+};
+
 import * as media from 'https://deno.land/std@0.152.0/media_types/mod.ts';
 
 export function contentType(fileName: string) {
@@ -14,14 +33,3 @@ export function contentType(fileName: string) {
 		if (type) return type;
 	}
 }
-
-export {
-	createHttpError,
-	isHttpError,
-} from 'https://deno.land/std@0.149.0/http/http_errors.ts';
-
-export {
-	isServerErrorStatus,
-	Status,
-	STATUS_TEXT,
-} from 'https://deno.land/std@0.152.0/http/http_status.ts';

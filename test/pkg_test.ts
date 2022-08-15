@@ -1,9 +1,4 @@
-import {
-	assert,
-	assertEquals,
-	assertExists,
-	assertFalse,
-} from 'https://deno.land/std@0.152.0/testing/asserts.ts';
+import { assert, assertEquals, assertExists, assertFalse } from './deps.ts';
 
 Deno.test('Fetching Packages', async (t) => {
 	const baseUrl = 'http://localhost:8080';

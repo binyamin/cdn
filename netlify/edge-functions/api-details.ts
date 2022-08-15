@@ -1,9 +1,7 @@
-import { compareEtag } from 'https://deno.land/std@0.151.0/http/util.ts';
-import { calculate as getETag } from 'https://deno.land/x/oak@v10.6.0/etag.ts';
-
 import type { EdgeFunction } from 'netlify:edge';
 import type { Documentation } from './lib/deno-types.ts';
 import { getDetails } from './lib/api/gitlab.ts';
+import { etag } from './lib/http.ts';
 
 const pattern = new URLPattern({
 	pathname: '/api/x/details/:package([a-zA-Z0-9_-]+){/:version}?',
@@ -27,12 +25,12 @@ const handler: EdgeFunction = async (request, context) => {
 		}[code](${details.url})`,
 	};
 
-	const etag = await getETag(JSON.stringify(result));
+	const nextETag = await etag.calculate(JSON.stringify(result));
 
 	if (request.headers.has('if-none-match')) {
 		const prevEtag = request.headers.get('if-none-match')!;
 
-		if (compareEtag(etag, prevEtag)) {
+		if (etag.compare(nextETag, prevEtag)) {
 			return new Response(null, {
 				status: 304,
 			});
@@ -42,7 +40,7 @@ const handler: EdgeFunction = async (request, context) => {
 	return context.json(result, {
 		status: 200,
 		headers: {
-			'ETag': etag,
+			'ETag': nextETag,
 		},
 	});
 };

@@ -20,5 +20,5 @@ try {
 
 export { env };
 
-import { decode } from 'https://deno.land/std@0.151.0/encoding/base64.ts';
+import { decode } from 'https://deno.land/std@0.152.0/encoding/base64.ts';
 export const base64 = { decode };

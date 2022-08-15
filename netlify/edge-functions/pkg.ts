@@ -1,11 +1,9 @@
-import * as path from 'https://deno.land/std@0.152.0/path/mod.ts';
-import { compareEtag } from 'https://deno.land/std@0.152.0/http/util.ts';
-
 import type { EdgeFunction } from 'netlify:edge';
 
+import { getFile } from './lib/api/gitlab.ts';
+import { path } from './lib/deps.ts';
 import { type Module } from './lib/common.ts';
 import * as http from './lib/http.ts';
-import { getFile } from './lib/api/gitlab.ts';
 
 const pattern = new URLPattern({
 	pathname: '/x/:name([a-zA-Z0-9_-]+){@:version([a-zA-Z0-9\\.+-]+)}?/:path+',
@@ -74,10 +72,10 @@ const handler: EdgeFunction = async (request, context) => {
 
 		// Caching
 		if (request.headers.has('if-none-match') && headers.has('etag')) {
-			const etag = headers.get('etag')!;
+			const nextETag = headers.get('etag')!;
 			const prevETag = request.headers.get('if-none-match')!;
 
-			if (compareEtag(etag, prevETag)) {
+			if (http.etag.compare(nextETag, prevETag)) {
 				logRequest(304);
 				return new Response(null, {
 					status: 304,
