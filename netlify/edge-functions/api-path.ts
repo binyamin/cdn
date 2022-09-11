@@ -11,11 +11,11 @@ import {
 
 const pattern = new URLPattern({
 	pathname:
-		'/api/x/:package([a-zA-Z0-9_-]+)/:version([a-zA-Z0-9\\.+-]+)/paths/:path*',
+		'/api/x/:package([a-zA-Z0-9_-]+)/:version([a-zA-Z0-9\\.+-]+)/paths/:path*{/}?',
 });
 
 const handler: EdgeFunction = async (request, context) => {
-	const matches = pattern.exec(request.url.replace(/\/index\.html?$/, ''));
+	const matches = pattern.exec(request.url);
 
 	if (!matches) return context.next();
 
