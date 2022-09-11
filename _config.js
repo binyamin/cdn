@@ -26,7 +26,9 @@ site.use(attributes());
 site.use(date());
 site.use(sass({
 	sourceMap: true,
-	sourceMapIncludeSources: true,
+	options: {
+		sourceMapIncludeSources: true,
+	},
 }));
 site.use(parcel_css({
 	sourceMap: true,
