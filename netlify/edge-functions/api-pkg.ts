@@ -16,8 +16,10 @@ const handler: EdgeFunction = async (request, context) => {
 		items: [
 			// GitLab
 			'deno-sass',
+			'deno-logger',
 			'lume-parcel-css',
 			'lume-sass',
+			'oak-nano-views',
 			'tiny-html-events',
 		],
 	};
