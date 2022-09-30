@@ -1,15 +1,15 @@
 export {
 	createHttpError,
 	isHttpError,
-} from 'https://deno.land/std@0.155.0/http/http_errors.ts';
+} from 'https://deno.land/std@0.158.0/http/http_errors.ts';
 
 export {
 	isServerErrorStatus,
 	Status,
 	STATUS_TEXT,
-} from 'https://deno.land/std@0.155.0/http/http_status.ts';
+} from 'https://deno.land/std@0.158.0/http/http_status.ts';
 
-import { compareEtag } from 'https://deno.land/std@0.155.0/http/util.ts';
+import { compareEtag } from 'https://deno.land/std@0.158.0/http/util.ts';
 import { calculate as getETag } from 'https://deno.land/x/oak@v11.1.0/etag.ts';
 
 export const etag = {
@@ -17,7 +17,7 @@ export const etag = {
 	calculate: getETag,
 };
 
-import * as media from 'https://deno.land/std@0.155.0/media_types/mod.ts';
+import * as media from 'https://deno.land/std@0.158.0/media_types/mod.ts';
 
 export function contentType(fileName: string) {
 	if (/\.[mc]?js$/i.test(fileName)) {
