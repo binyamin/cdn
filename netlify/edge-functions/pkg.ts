@@ -64,9 +64,9 @@ const handler: EdgeFunction = async (request, context) => {
 					if (error.status !== 404) {
 						throw error;
 					}
+				} else {
+					throw error;
 				}
-
-				throw error;
 			}
 		}
 
