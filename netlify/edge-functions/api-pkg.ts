@@ -20,6 +20,7 @@ const handler: EdgeFunction = async (request, context) => {
 			'deno-watcher',
 			'lume-parcel-css',
 			'lume-sass',
+			'oak-jsx',
 			'oak-nano-views',
 			'tiny-html-events',
 		],
