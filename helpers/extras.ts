@@ -1,4 +1,10 @@
 import { Plugin } from 'lume/core.ts';
+import browserslist from 'npm:browserslist@4.21.4';
+import { browserslistToTargets } from 'lume/deps/lightningcss.ts';
+
+export function getTargets(list: string | readonly string[]) {
+	return browserslistToTargets(browserslist(list));
+}
 
 const plugin: Plugin = (site) => {
 	site.filter('log', console.debug);
